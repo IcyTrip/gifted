@@ -9,3 +9,42 @@
 .profile-picture.profile-picture-sm {
   height: 64px;
 }
+
+.gif-card{
+  content: "";
+}
+
+.gif-card:hover{
+  filter:brightness(0.9);
+}
+
+.gif-card:hover::after{
+  content: "Click to copy link to clipboard.";
+  color:white;
+  position:absolute;
+  bottom:100%;
+  left:50%;
+  transform:translateX(-50%);
+  background-color:rgba(0,0,0,0.7);
+  padding:4px 8px;
+  border-radius:4px;
+  white-space:nowrap;
+  font-size:12px;
+  margin-bottom:6px;
+}
+
+.gif-card.copied::after{
+  content: "Link copied!";
+  color:white;
+  position:absolute;
+  bottom:100%;
+  left:50%;
+  transform:translateX(-50%);
+  background-color:rgba(0,0,0,0.7);
+  padding:4px 8px;
+  border-radius:4px;
+  white-space:nowrap;
+  font-size:12px;
+  margin-bottom:6px;
+  font-weight:bold;
+}

@@ -1,3 +1,6 @@
+import { AppState } from "../AppState.js";
+import { Gif } from "../models/Gif.js";
+
 export const giphyApi = axios.create({
     baseURL: "http://api.giphy.com/v1/gifs",
     timeout: 8000,
@@ -17,7 +20,12 @@ class GiphyService{
         })
         console.log(response.data);
         const gifs = response.data.data.map(g => g.images.downsized_large.url);
-        return gifs;
+
+        AppState.gifs.length = 0;
+
+        response.data.data.forEach(gif => {
+            AppState.gifs.push(new Gif(gif));
+        })
     }
 }
 

@@ -1,11 +1,33 @@
 import { api } from "./AxiosService.js";
+import { AppState } from "../AppState.js";
+import { Gift } from "../models/Gift.js";
 
 
 class GiftsService{
-    async getGifts() {
+    async getGifts(refresh = false) {
         const response = await api.get(`api/gifts`);
-        // Api does not retrieve gifts because it is required you be logged in to do so. (i cannot find how to login)
-        console.log("Get Gifts Run");
+
+        if (refresh) {
+            AppState.gifts.length = 0;
+        }
+        response.data.forEach(giftData => {
+            AppState.gifts.push(new Gift(giftData));
+        })
+    }
+
+    async openGift(giftId) {
+        const gift = AppState.gifts.find(g => g.id === giftId);
+        if(gift) {
+            gift.opened = true;
+            const openedGift = AppState.gifts.find(gift => gift.id === giftId);
+            const response = await api.put(`api/gifts/${giftId}`, openedGift)
+        }
+    }
+    
+    async createGift(giftTag, giftUrl) {
+        const newGift = new Gift({ tag: giftTag, url: giftUrl });
+        const response = await api.post(`api/gifts`, newGift);
+        AppState.gifts.push(new Gift(response.data));
     }
 }
 

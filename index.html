@@ -40,23 +40,29 @@
 
   <!-- SECTION -->
   <main>
-    <div class="container bg-dark w-25 mt-5 text-light">
-      <form class="p-2">
-        <h1>Gifted</h1>
-        <label for="tag">Tag</label>
-        <input type="text" class="form-control mt-2 mb-3" id="tag" placeholder="Enter tag...">
-        <label for="url">Url</label>
-        <input type="text" class="form-control mt-2 mb-3" id="url" placeholder="Enter url...">
-        <button type="submit" class="btn btn-secondary mt-2">Submit</button>
-      </form>
-      <hr class="m-auto my-4">
-      <form id="gifSearch" class="pb-3">
-        <label for="search">Search Gifs</label>
-        <div class="d-flex align-items-center">
-          <input type="text" class="form-control mt-2 border-0" id="search" placeholder="Search gifs..." style="border-radius:3px 0 0 3px;">
-          <button type="submit" class="btn btn-primary mt-2 border-0" style="border-radius:0 3px 3px 0;"><i class="mdi mdi-magnify"></i></button>
-        </div>
-      </form>
+    <div class="container mt-5 d-flex">
+      <div class="bg-dark text-light p-3" style="width:30%;">
+        <form id="gifCreate">
+          <h1>Gifted</h1>
+          <label for="tag">Tag</label>
+          <input type="text" class="form-control mt-2 mb-3" id="tag" placeholder="Enter tag...">
+          <label for="url">Url</label>
+          <input type="text" class="form-control mt-2 mb-3" id="url" placeholder="Enter url...">
+          <button class="btn btn-secondary mt-2">Submit</button>
+        </form>
+        <hr class="m-auto my-4">
+        <form id="gifSearch" class="pb-3">
+          <label for="search">Search Gifs</label>
+          <div class="d-flex align-items-center">
+            <input type="text" class="form-control mt-2 border-0" id="search" placeholder="Search gifs..." style="border-radius:3px 0 0 3px;">
+            <button type="submit" class="btn btn-primary mt-2 border-0" style="border-radius:0 3px 3px 0;"><i class="mdi mdi-magnify"></i></button>
+          </div>
+        </form>
+        <div id="gif-container" class="d-flex flex-wrap justify-content-center"></div>
+      </div>
+      <div id="gift-container" class="d-flex justify-content-center flex-wrap w-75 bg-grey">
+
+      </div>
     </div>
   </main>
 
@@ -82,15 +88,34 @@
   <script src="app/App.js" type="module"></script>
 
   <script type="module">
-    import { giphyService } from "./app/services/GiphyService.js";
+    import { giphyController } from "./app/controllers/GiphyController.js";
+    import { giftsController } from "./app/controllers/GiftsController.js";
 
     const form = document.getElementById("gifSearch");
+    const createForm = document.getElementById("gifCreate");
 
     form.addEventListener("submit", async(event) => {
       event.preventDefault();
       const query = document.getElementById("search").value;
-      await giphyService.search(query);
+      await giphyController.searchGifs(query);
+      await giphyController._drawGifs();
     })
+    
+    createForm.addEventListener("submit", async(event) => {
+      event.preventDefault();
+      const tag = document.getElementById("tag").value;
+      const url = document.getElementById("url").value;
+      await giftsController.createGift(tag, url);
+      await giftsController.getGift(true);
+    })
+
+    window.copyLink = function(element) {
+      element.classList.add("copied");
+
+      setTimeout(() => {
+        element.classList.remove("copied");
+      }, 2000);
+    }
   </script>
 </body>
 
