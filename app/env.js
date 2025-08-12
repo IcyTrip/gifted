@@ -5,3 +5,5 @@ export const useSockets = false;
 export const domain = "codeworksclassroom.auth0.com";
 export const clientId = "pOXw2OGv1LsYi7LEBmDF04RLkXQvldml";
 export const audience = "https://codeworksclassroom.com";
+
+export const giphyAPI = "aoG6vICdJ3P6oIjFAgRmppYcyNfPiS5q";

@@ -1,10 +1,11 @@
+import { AppState } from "../AppState.js";
 import { giftsService } from "../services/GiftsService.js";
 import { Pop } from "../utils/Pop.js";
 
 export class GiftsController {
     constructor(){
         console.log("Gifts Controller");
-        this.getGift();
+        AppState.on('account', this.getGift)
     }
 
     async getGift() {

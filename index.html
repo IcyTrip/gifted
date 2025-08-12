@@ -40,7 +40,24 @@
 
   <!-- SECTION -->
   <main>
-    
+    <div class="container bg-dark w-25 mt-5 text-light">
+      <form class="p-2">
+        <h1>Gifted</h1>
+        <label for="tag">Tag</label>
+        <input type="text" class="form-control mt-2 mb-3" id="tag" placeholder="Enter tag...">
+        <label for="url">Url</label>
+        <input type="text" class="form-control mt-2 mb-3" id="url" placeholder="Enter url...">
+        <button type="submit" class="btn btn-secondary mt-2">Submit</button>
+      </form>
+      <hr class="m-auto my-4">
+      <form id="gifSearch" class="pb-3">
+        <label for="search">Search Gifs</label>
+        <div class="d-flex align-items-center">
+          <input type="text" class="form-control mt-2 border-0" id="search" placeholder="Search gifs..." style="border-radius:3px 0 0 3px;">
+          <button type="submit" class="btn btn-primary mt-2 border-0" style="border-radius:0 3px 3px 0;"><i class="mdi mdi-magnify"></i></button>
+        </div>
+      </form>
+    </div>
   </main>
 
   <!-- SECTION -->
@@ -63,6 +80,18 @@
     integrity="sha256-hw7v8jZF/rFEdx1ZHepT4D73AFTHLu/P9kEyrNesRyc=" crossorigin="anonymous"></script>
 
   <script src="app/App.js" type="module"></script>
+
+  <script type="module">
+    import { giphyService } from "./app/services/GiphyService.js";
+
+    const form = document.getElementById("gifSearch");
+
+    form.addEventListener("submit", async(event) => {
+      event.preventDefault();
+      const query = document.getElementById("search").value;
+      await giphyService.search(query);
+    })
+  </script>
 </body>
 
 </html>
