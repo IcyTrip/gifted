@@ -30,8 +30,7 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-          <!-- NAVLINKS -->
-          <!-- <a href="#/about" class="nav-link">About</a> -->
+
         </div>
       </div>
       <div class="flex-grow-1 justify-content-end align-items-center d-flex" id="authstate"></div>
@@ -40,14 +39,14 @@
 
   <!-- SECTION -->
   <main>
-    <div class="container mt-5 d-flex">
-      <div class="bg-dark text-light p-3" style="width:30%;">
+    <div class="container mt-lg-5 mt-3 d-lg-flex">
+      <div class="bg-dark text-light p-3 w-lg-30 w-100 ">
         <form id="gifCreate">
           <h1>Gifted</h1>
           <label for="tag">Tag</label>
           <input type="text" class="form-control mt-2 mb-3" id="tag" placeholder="Enter tag...">
           <label for="url">Url</label>
-          <input type="text" class="form-control mt-2 mb-3" id="url" placeholder="Enter url...">
+          <input type="text" class="searchGif form-control mt-2 mb-3" id="url" placeholder="Enter url...">
           <button class="btn btn-secondary mt-2">Submit</button>
         </form>
         <hr class="m-auto my-4">
@@ -60,7 +59,7 @@
         </form>
         <div id="gif-container" class="d-flex flex-wrap justify-content-center"></div>
       </div>
-      <div id="gift-container" class="d-flex justify-content-center flex-wrap w-75 bg-grey">
+      <div id="gift-container" class="w-lg-75 w-100 bg-grey p-3" style="column-gap:1rem;">
 
       </div>
     </div>
@@ -109,12 +108,8 @@
       await giftsController.getGift(true);
     })
 
-    window.copyLink = function(element) {
-      element.classList.add("copied");
-
-      setTimeout(() => {
-        element.classList.remove("copied");
-      }, 2000);
+    window.copyLink = function(url) {
+      document.querySelector(".searchGif").value = url;
     }
   </script>
 </body>

@@ -19,7 +19,7 @@
 }
 
 .gif-card:hover::after{
-  content: "Click to copy link to clipboard.";
+  content: "Click to use gif.";
   color:white;
   position:absolute;
   bottom:100%;
@@ -34,7 +34,7 @@
 }
 
 .gif-card.copied::after{
-  content: "Link copied!";
+  content: "Gif copied!";
   color:white;
   position:absolute;
   bottom:100%;
@@ -47,4 +47,33 @@
   font-size:12px;
   margin-bottom:6px;
   font-weight:bold;
+}
+
+@media(min-width:992px) {
+  .w-lg-30{
+    width:30% !important;
+  }
+}
+
+@media(min-width:1200px) {
+  .gif-card{
+    width:42%;
+  }
+}
+
+@media(max-width:991px) {
+  .gif-card{
+    width:30%;
+  }
+}
+
+#gift-container{
+  column-count:3;
+}
+
+@media(max-width:575px) {
+  #gift-container{
+    column-count:2 !important;
+    font-size:.75rem !important;
+  }
 }

@@ -13,8 +13,17 @@ export class GiftsController {
     
     _drawGifts() {
         let giftsHTML = "";
+        let giftCreatorId;
+        const accountId = AppState.account.id;
         AppState.gifts.forEach(gift => {
-            giftsHTML += gift.GiftCardTemplate;
+            giftCreatorId = gift.creatorId;
+            
+            if(giftCreatorId == accountId) {
+                giftsHTML += gift.GiftCardTemplateDelete;
+            }
+            else{
+                giftsHTML += gift.GiftCardTemplate;
+            }
         });
         setHTML('gift-container', giftsHTML);
     }
@@ -44,6 +53,15 @@ export class GiftsController {
             await giftsService.createGift(giftTag, giftUrl);
         } catch(error) {
             Pop.toast("Could not create gift", 'error');
+            console.log(error);
+        }
+    }
+
+    async deleteGift(giftId) {
+        try{
+            await giftsService.deleteGift(giftId);
+        } catch(error) {
+            Pop.toast("Could not delete gift", 'error');
             console.log(error);
         }
     }

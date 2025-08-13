@@ -6,7 +6,7 @@ export class Gif{
 
     get GifTemplate() {
         return /*html*/`
-            <div onclick="navigator.clipboard.writeText('${this.url}'); copyLink(this);" class="gif-card m-2" style="width:45%;">
+            <div onclick="copyLink('${this.url}')" class="gif-card m-2">
                 <img src="${this.url}" alt="Gif" class="w-100 object-fit-cover">
             </div>
         `

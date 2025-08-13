@@ -29,6 +29,11 @@ class GiftsService{
         const response = await api.post(`api/gifts`, newGift);
         AppState.gifts.push(new Gift(response.data));
     }
+
+    async deleteGift(giftId) {
+        await api.delete(`api/gifts/${giftId}`);
+        AppState.gifts = AppState.gifts.filter(g => g.id !== giftId);
+    }
 }
 
 export const giftsService = new GiftsService();
